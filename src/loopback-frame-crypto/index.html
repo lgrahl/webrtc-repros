@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="de-DE">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="google" content="notranslate" />
+    <meta name="robots" content="noindex" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <title>Loopback Frame Crypto</title>
+    <script type="module" src="./client.ts"></script>
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        width: 100vw;
+        font-family: sans-serif;
+        color: #fff;
+        background-color: #222;
+      }
+
+      a:link,
+      a:visited,
+      a:hover,
+      a:active {
+        color: #6699ff;
+      }
+
+      #container {
+        height: 100vh;
+        display: grid;
+        grid-template:
+          'controls     controls    ' auto
+          'video-sender video-receiver' 1fr
+          / 1fr 1fr;
+      }
+
+      #controls {
+        grid-area: controls;
+        place-content: center;
+        display: grid;
+        grid-template:
+          'crypto-worker-label crypto-worker-checkbox' auto
+          'strip-ssrcs-label   strip-ssrcs-checkbox  ' auto
+          'start-button        start-button          ' auto
+          / auto auto;
+        place-items: center stretch;
+        gap: 4px;
+      }
+
+      #start {
+        grid-area: start-button;
+      }
+
+      #video-sender {
+        grid-area: video-sender;
+      }
+
+      #video-receiver {
+        grid-area: video-receiver;
+      }
+
+      video {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        background-color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div id="controls">
+        <label for="crypto-worker">Crypto Worker</label>
+        <input id="crypto-worker" type="checkbox" />
+
+        <label for="strip-ssrcs">Strip SSRCs</label>
+        <input id="strip-ssrcs" type="checkbox" />
+
+        <button id="start">Start</button>
+      </div>
+
+      <video id="video-sender" playsinline autoplay muted></video>
+
+      <audio id="audio-receiver" playsinline autoplay></audio>
+      <video id="video-receiver" playsinline autoplay></video>
+    </div>
+  </body>
+</html>
