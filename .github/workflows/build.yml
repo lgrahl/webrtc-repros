@@ -1,0 +1,23 @@
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    name: Build and deploy all repros
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          mkdir gh-pages
+          npm ci
+      - run: |
+          npm run loopback-frame-crypto:build
+          mv build gh-pages/loopback-frame-crypto
+      - uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: gh-pages
